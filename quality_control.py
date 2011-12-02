@@ -590,8 +590,6 @@ class qc_test_line(osv.osv):
     def quality_test_quantitative_check( self, cr, uid, test_line, context ):
         amount = self.pool.get('product.uom')._compute_qty( cr, uid, test_line.uom_id.id, test_line.actual_value_qt, test_line.test_uom_id.id)
 
-        precision = self.pool.get('decimal.precision').precision_get(cr, uid, 'Quality Control')
-        getcontext().prec = precision 
         try:
             damount = Decimal( str(amount) )
             min_amount = Decimal( str(test_line.min_value) )
