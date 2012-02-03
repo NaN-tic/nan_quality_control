@@ -310,7 +310,7 @@
           <field name="test_external_note" nolabel="1" select="2"/>
         </group>
         <separator string="Values" colspan="4"/>
-        <field name="test_line_ids" nolabel="1" colspan="4" editable="bottom"/>
+        <field name="test_line_ids" nolabel="1" colspan="4"/>
         <separator string="Formula" colspan="4"/>
         <field name="formula" colspan="4" nolabel="1" />
         <group col="9" colspan="4">
@@ -394,7 +394,7 @@
     <field name="model">qc.test.line</field>
     <field name="type">tree</field>
     <field name="arch" type="xml">
-      <tree string="Test Line">
+      <tree string="Test Line" editable="bottom">
         <field name="name" />
         <field name="company_id"/>
         <field name="proof_id"/>
