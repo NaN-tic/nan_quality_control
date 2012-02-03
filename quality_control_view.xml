@@ -301,18 +301,24 @@
           <field name="test_template_id" readonly="True" select="1"/>
           <button string="Select Template" name="%(action_qc_test_set_template_wizard_form)d" type="action" states="draft"/>
         </group>
-        <group col="1" colspan="2" >
-          <separator string="Internal Note"/>
-          <field name="test_internal_note" nolabel="1" select="2"/>
-        </group>
-        <group col="1" colspan="2" >
-          <separator string="External Note"/>
-          <field name="test_external_note" nolabel="1" select="2"/>
-        </group>
-        <separator string="Values" colspan="4"/>
-        <field name="test_line_ids" nolabel="1" colspan="4"/>
-        <separator string="Formula" colspan="4"/>
-        <field name="formula" colspan="4" nolabel="1" />
+        <notebook colspan="4">
+          <page string="Values">
+            <!-- <separator string="Values" colspan="4"/> -->
+            <field name="test_line_ids" nolabel="1" colspan="4"/>
+            <separator string="Formula" colspan="4"/>
+            <field name="formula" colspan="4" nolabel="1" />
+          </page>
+          <page string="Notes">
+            <group col="1" colspan="2" >
+              <separator string="Internal Note"/>
+              <field name="test_internal_note" nolabel="1" select="2"/>
+            </group>
+            <group col="1" colspan="2" >
+              <separator string="External Note"/>
+              <field name="test_external_note" nolabel="1" select="2"/>
+            </group>
+          </page>
+        </notebook>
         <group col="9" colspan="4">
           <field name="state" readonly="True" select="1"/>
           <field name="success"/>
