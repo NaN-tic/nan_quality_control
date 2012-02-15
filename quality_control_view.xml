@@ -325,7 +325,7 @@
           <field name="formula_result"/>
           <field name="uom_id" />
           <button name="confirm" states="draft" string="Confirm" icon="gtk-ok"/>
-          <button name="approve" states="waiting" string="Approve"  groups="nan_quality_control.group_quality_control_manager" icon="gtk-ok"/>
+          <button name="approve" states="waiting" string="Approve"  groups="nan_quality_control.group_quality_control_supervisor" icon="gtk-ok"/>
           <button name="cancel"  states="waiting,failed,success" string="Cancel" icon="gtk-cancel"/>
         </group>
       </form>

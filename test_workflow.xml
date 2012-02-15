@@ -48,14 +48,14 @@
         <field name="act_from" ref="qc-waiting"/>
         <field name="act_to" ref="qc-failed"/>
         <field name="condition">not success</field>
-        <field name="group_id" ref="group_quality_control_manager" />
+        <field name="group_id" ref="group_quality_control_supervisor" />
         <field name="signal">approve</field>
     </record>
     <record  id="trans_waiting_success" model="workflow.transition">
         <field name="act_from" ref="qc-waiting"/>
         <field name="act_to" ref="qc-success"/>
         <field name="condition">success</field>
-        <field name="group_id" ref="group_quality_control_manager" />
+        <field name="group_id" ref="group_quality_control_supervisor" />
         <field name="signal">approve</field>
     </record>
     <record id="trans_waiting_draft" model="workflow.transition">
