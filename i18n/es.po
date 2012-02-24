@@ -2,21 +2,21 @@
 # This file contains the translation of the following modules:
 # 	* nan_quality_control
 #
-# Jordi Pasquina <jordi@nan-tic.com>, 2010.
+# Jordi Pasquina <jordi@nan-tic.com>, 2010, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.12\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-08-10 14:43+0000\n"
-"PO-Revision-Date: 2010-08-31 10:29+0200\n"
-"Last-Translator: Jordi Pasquina <jordi@nan-tic.com>\n"
-"Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2012-02-24 12:13+0000\n"
+"PO-Revision-Date: 2012-02-24 13:24+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish <>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 
 #. module: nan_quality_control
 #: view:qc.test.line:0
@@ -47,9 +47,10 @@ msgid "qc.test.set.template.wizard"
 msgstr "qc.test.conjunto.plantilla.assistente"
 
 #. module: nan_quality_control
-#: field:qc.test.line,uom_id:0 field:qc.test.template.line,uom_id:0
+#: field:qc.test,uom_id:0 field:qc.test.line,uom_id:0
+#: field:qc.test.template,uom_id:0 field:qc.test.template.line,uom_id:0
 msgid "Uom"
-msgstr "Uom"
+msgstr "UdM"
 
 #. module: nan_quality_control
 #: model:ir.module.module,description:nan_quality_control.module_meta_information
@@ -71,12 +72,27 @@ msgstr "qc.test.plantilla.linea"
 #. module: nan_quality_control
 #: field:qc.test.template,fill_correct_values:0
 msgid "Fill With Correct Values"
-msgstr "REllenar con los valores correctos"
+msgstr "Rellenar con los valores correctos"
 
 #. module: nan_quality_control
 #: model:ir.model,name:nan_quality_control.model_qc_proof_synonym
 msgid "qc.proof.synonym"
 msgstr "qc.prueba.sinonimo"
+
+#. module: nan_quality_control
+#: field:qc.posible.value,company_id:0 field:qc.proof,company_id:0
+#: field:qc.proof.method,company_id:0 field:qc.proof.synonym,company_id:0
+#: field:qc.test,company_id:0 field:qc.test.line,company_id:0
+#: field:qc.test.template,company_id:0
+#: field:qc.test.template.category,company_id:0
+#: field:qc.test.template.line,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: nan_quality_control
+#: field:qc.test.link,object:0
+msgid "Object"
+msgstr "Modelo"
 
 #. module: nan_quality_control
 #: field:qc.test.template,object_id:0
@@ -94,6 +110,11 @@ msgid "Success?"
 msgstr "Éxito?"
 
 #. module: nan_quality_control
+#: model:ir.ui.menu,name:nan_quality_control.qc_test_link_menu
+msgid "Test Links"
+msgstr "Referencias en tests"
+
+#. module: nan_quality_control
 #: model:ir.actions.act_window,name:nan_quality_control.action_qc_test_template
 #: model:ir.model,name:nan_quality_control.model_qc_test_template
 #: model:ir.ui.menu,name:nan_quality_control.qc_test_template_menu
@@ -106,6 +127,21 @@ msgstr "Plantilla del test"
 #: selection:qc.test.template.line,type:0
 msgid "Qualitative"
 msgstr "Cualitativo"
+
+#. module: nan_quality_control
+#: model:qc.test.link,name:nan_quality_control.test_link_sale
+msgid "Sale Order"
+msgstr "Orden de venta"
+
+#. module: nan_quality_control
+#: model:qc.test.link,name:nan_quality_control.test_link_prodlot
+msgid "Production Lot"
+msgstr "Lote de producción"
+
+#. module: nan_quality_control
+#: model:qc.test.link,name:nan_quality_control.test_link_purchase
+msgid "Purchase Order"
+msgstr "Orden de compra"
 
 #. module: nan_quality_control
 #: field:qc.test.line,proof_type:0
@@ -141,7 +177,6 @@ msgstr "Seleccionar plantilla"
 
 #. module: nan_quality_control
 #: view:qc.test.line:0
-#, fuzzy
 msgid "notes"
 msgstr "Notas"
 
@@ -176,11 +211,9 @@ msgid "Maximum valid value if it is a quantitative proof."
 msgstr "Máximo valor válido si se trata de una prueba cuantitativa."
 
 #. module: nan_quality_control
-#: field:qc.posible.value,active:0 field:qc.proof,active:0
-#: field:qc.proof.method,active:0 field:qc.test.template,active:0
-#: field:qc.test.template.category,active:0
-msgid "Active"
-msgstr "Activo"
+#: view:qc.test.link:0
+msgid "Test Reference Type"
+msgstr "Tipo de referència en tests"
 
 #. module: nan_quality_control
 #: view:qc.proof.method:0
@@ -209,6 +242,11 @@ msgid "Value of the result if it is a qualitative proof."
 msgstr "Valor del resultado si se trata de una prueba cualitativa."
 
 #. module: nan_quality_control
+#: field:qc.test.link,priority:0
+msgid "Priority"
+msgstr "Prioridad"
+
+#. module: nan_quality_control
 #: field:qc.test,state:0
 msgid "State"
 msgstr "Estado"
@@ -227,7 +265,7 @@ msgstr "Posible valor de la prueba"
 #: view:qc.test:0 field:qc.test,formula:0 view:qc.test.template:0
 #: field:qc.test.template,formula:0
 msgid "Formula"
-msgstr "Formula"
+msgstr "Fórmula"
 
 #. module: nan_quality_control
 #: view:qc.test.line:0
@@ -238,6 +276,11 @@ msgstr "Resultado del test"
 #: model:ir.ui.menu,name:nan_quality_control.qc_menu_config
 msgid "Configuration"
 msgstr "Configuración"
+
+#. module: nan_quality_control
+#: selection:qc.test,state:0
+msgid "Waiting Supervisor Approval"
+msgstr "Esperando la aprobación del supervisor"
 
 #. module: nan_quality_control
 #: model:ir.actions.act_window,name:nan_quality_control.action_proof_synonym
@@ -255,9 +298,20 @@ msgid "qc.test.line"
 msgstr "qc.test.linea"
 
 #. module: nan_quality_control
+#: model:qc.test.link,name:nan_quality_control.test_link_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: nan_quality_control
 #: field:qc.test.template.category,complete_name:0
 msgid "Full Name"
 msgstr "Nombre completo"
+
+#. module: nan_quality_control
+#: code:addons/nan_quality_control/quality_control.py:398
+#, python-format
+msgid "Error:"
+msgstr "Error:"
 
 #. module: nan_quality_control
 #: field:qc.test.line,actual_value_ql:0
@@ -280,17 +334,12 @@ msgstr "Valores posibles"
 #. module: nan_quality_control
 #: field:qc.test.template,category_id:0
 msgid "Category"
-msgstr "Categoria"
+msgstr "Categoría"
 
 #. module: nan_quality_control
 #: model:qc.test.template.category,name:nan_quality_control.qc_test_template_category_referenced
 msgid "referenced"
 msgstr "referencia"
-
-#. module: nan_quality_control
-#: view:qc.test:0
-msgid "Calculate"
-msgstr "Calculate"
 
 #. module: nan_quality_control
 #: model:ir.module.module,shortdesc:nan_quality_control.module_meta_information
@@ -302,6 +351,13 @@ msgstr "Control de calidad"
 #: field:qc.test.template.category,name:0
 msgid "Category Name"
 msgstr "Nombre de la Categoría"
+
+#. module: nan_quality_control
+#: model:ir.actions.act_window,name:nan_quality_control.qc_test_link_act
+#: model:ir.model,name:nan_quality_control.model_qc_test_link
+#: view:qc.test.link:0
+msgid "Test Reference Types"
+msgstr "Tipos de referencias en tests"
 
 #. module: nan_quality_control
 #: model:ir.model,name:nan_quality_control.model_qc_proof_method
@@ -341,11 +397,6 @@ msgid "Test Method"
 msgstr "Método del test"
 
 #. module: nan_quality_control
-#: model:ir.model,name:nan_quality_control.model_qc_test_template_trigger
-msgid "qc.test.template.trigger"
-msgstr "qc.test.plantilla.disparador"
-
-#. module: nan_quality_control
 #: field:qc.test,success:0
 msgid "Success"
 msgstr "Éxito"
@@ -353,17 +404,19 @@ msgstr "Éxito"
 #. module: nan_quality_control
 #: help:qc.test.line,test_uom_id:0
 msgid "UoM of the value of the result if it is a quantitative proof."
-msgstr "UoM del valor del resultado, si se trata de una prueba cuantitativa."
+msgstr "UdM del valor del resultado, si se trata de una prueba cuantitativa."
 
 #. module: nan_quality_control
 #: field:qc.test.line,test_uom_id:0
 msgid "Uom Test"
-msgstr "Uom test"
+msgstr "UdM test"
 
 #. module: nan_quality_control
-#: selection:qc.test,state:0
-msgid "Waiting Supervisor Approval"
-msgstr "Esperando la aprobación del supervisor"
+#: field:qc.posible.value,active:0 field:qc.proof,active:0
+#: field:qc.proof.method,active:0 field:qc.test.template,active:0
+#: field:qc.test.template.category,active:0
+msgid "Active"
+msgstr "Activo"
 
 #. module: nan_quality_control
 #: selection:qc.proof,type:0 selection:qc.test.line,proof_type:0
@@ -395,7 +448,7 @@ msgstr "Nota interna"
 #. module: nan_quality_control
 #: field:qc.test,name:0
 msgid "Number"
-msgstr "Number"
+msgstr "Número"
 
 #. module: nan_quality_control
 #: field:qc.proof,synonym_ids:0 field:qc.proof,synonyms:0
@@ -406,8 +459,13 @@ msgstr "Sinónimos"
 #: help:qc.test.line,uom_id:0
 msgid "UoM for minimum and maximum values if it is a quantitative proof."
 msgstr ""
-"UoM para el valor Máximo y Mínimo válido, si se trata de una prueba "
+"UdM para el valor Máximo y Mínimo válido, si se trata de una prueba "
 "cuantitativa."
+
+#. module: nan_quality_control
+#: model:qc.test.link,name:nan_quality_control.test_link_invoice
+msgid "Invoice"
+msgstr "Factura"
 
 #. module: nan_quality_control
 #: view:qc.test:0 view:qc.test.set.template.wizard:0
@@ -426,9 +484,8 @@ msgstr "Mínimo"
 
 #. module: nan_quality_control
 #: field:qc.test,formula_result:0
-#, fuzzy
 msgid "Formula Value"
-msgstr "Valor posible"
+msgstr "Valor fórmula"
 
 #. module: nan_quality_control
 #: view:qc.test.line:0
@@ -439,6 +496,11 @@ msgstr "Valores del Test"
 #: model:ir.model,name:nan_quality_control.model_qc_posible_value
 msgid "qc.posible.value"
 msgstr "qc.posible.valor"
+
+#. module: nan_quality_control
+#: model:qc.test.link,name:nan_quality_control.test_link_product
+msgid "Product"
+msgstr "Producto"
 
 #. module: nan_quality_control
 #: view:qc.proof.synonym:0
@@ -462,7 +524,12 @@ msgid "This field will be active if all tests have succeeded."
 msgstr "Este campo se activa si todas las pruebas han tenido éxito."
 
 #. module: nan_quality_control
-#: field:qc.test.line,notes:0 view:qc.test.template.line:0
+#: model:qc.test.link,name:nan_quality_control.test_link_picking
+msgid "Picking"
+msgstr "Albarán"
+
+#. module: nan_quality_control
+#: view:qc.test:0 field:qc.test.line,notes:0 view:qc.test.template.line:0
 #: field:qc.test.template.line,notes:0
 msgid "Notes"
 msgstr "Notas"
@@ -481,8 +548,8 @@ msgstr "Línea del test"
 #. module: nan_quality_control
 #: field:qc.posible.value,name:0 field:qc.proof,name:0
 #: field:qc.proof.method,name:0 field:qc.proof.synonym,name:0
-#: field:qc.test.line,name:0 field:qc.test.template,name:0
-#: field:qc.test.template.line,name:0
+#: field:qc.test.line,name:0 field:qc.test.link,name:0
+#: field:qc.test.template,name:0 field:qc.test.template.line,name:0
 msgid "Name"
 msgstr "Nombre"
 
@@ -526,6 +593,12 @@ msgstr "Aceptar"
 #: help:qc.test.template.category,active:0
 msgid "The active field allows you to hide the category without removing it."
 msgstr "El campo activo le permite ocultar la categoría sin eliminarlo."
+
+#~ msgid "Calculate"
+#~ msgstr "Calculate"
+
+#~ msgid "qc.test.template.trigger"
+#~ msgstr "qc.test.plantilla.disparador"
 
 #~ msgid "Trigger"
 #~ msgstr "Disparador"

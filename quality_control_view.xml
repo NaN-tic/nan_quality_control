@@ -150,6 +150,55 @@
     <field name="view_mode">tree,form</field>
   </record>
 
+
+    <!-- qc.test.link -->
+    <record id="qc_test_link_form" model="ir.ui.view">
+        <field name="name">qc.test.link.form</field>
+        <field name="model">qc.test.link</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Test Reference Type">
+                <field name="name"/>
+                <field name="object"/>
+                <field name="priority"/>
+            </form>
+        </field>
+    </record>
+    
+    <record id="qc_test_link_tree" model="ir.ui.view">
+        <field name="name">qc.test.link.form</field>
+        <field name="model">qc.test.link</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Test Reference Types">
+                <field name="name"/>
+                <field name="object"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="qc_test_link_search" model="ir.ui.view">
+        <field name="name">qc.test.link.search</field>
+        <field name="model">qc.test.link</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="Test Reference Types">
+                <field name="name"/>
+                <field name="object"/>
+            </search>
+        </field>
+    </record>
+    
+    <record id="qc_test_link_act" model="ir.actions.act_window">
+        <field name="name">Test Reference Types</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">qc.test.link</field>
+        <field name="view_type">form</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="qc_test_link_search"/>
+    </record>
+
+
   <!-- qc.test.template -->
   <record model="ir.ui.view" id="qc_test_template_form_view">
     <field name="name">qc.test.template.form</field>
@@ -427,12 +476,12 @@
 
 	<menuitem name="Quality Control" id="qc_menu" />
 	<menuitem parent="qc_menu"  name="Configuration" id="qc_menu_config" />
-	<menuitem
-		name="Method"
-		parent="qc_menu_config"
-		id="qc_proof_method_menu"
-		action="action_qc_proof_method"
-		/>
+    <menuitem
+        name="Method"
+        parent="qc_menu_config"
+        id="qc_proof_method_menu"
+        action="action_qc_proof_method"
+        />
 
   <menuitem
 		name="Posible Values"
@@ -475,6 +524,14 @@
 		id="qc_test_lines_menu"
 		action="action_qc_test_line"
 		/>
+    
+    <menuitem
+        name="Test Links"
+        parent="qc_menu_config"
+        id="qc_test_link_menu"
+        action="qc_test_link_act"
+        groups="base.group_system"
+        />
 
 </data>
 </openerp>

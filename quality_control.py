@@ -170,6 +170,37 @@ class qc_proof_synonym(osv.osv):
 qc_proof_synonym()
 
 
+def _links_get(self, cr, uid, context={}):
+    """
+    Returns a list of tuples of 'model names' and 'Model title' to use as 
+    typs in reference fields.
+    """
+    test_link_proxy = self.pool.get('qc.test.link')
+    ids = test_link_proxy.search(cr, uid, [])
+    res = test_link_proxy.read(cr, uid, ids, ['object', 'name'], context)
+    return [(r['object'], r['name']) for r in res]
+
+class qc_test_link(osv.osv):
+    """
+    This model is used to manage available models to link in the Reference 
+    fields of qc.test and qc.test.template
+    """
+    _name = 'qc.test.link'
+    _description = "Test Reference Types"
+    _order = 'priority'
+    
+    _columns = {
+        'name': fields.char('Name', size=64, required=True, translate=True),
+        'object': fields.char('Object', size=64, required=True),
+        'priority': fields.integer('Priority'),
+    }
+    
+    _defaults = {
+        'priority': 5,
+    }
+qc_test_link()
+
+
 class qc_test_template_category( osv.osv):
     """
     This model is used to categorize proof templates.
@@ -231,12 +262,6 @@ class qc_test_template(osv.osv):
 
     _name = 'qc.test.template'
     _description='Test Template'
-
-    def _links_get(self, cr, uid, context=None):
-        obj = self.pool.get('res.request.link')
-        ids = obj.search(cr, uid, [], context=context)
-        res = obj.read(cr, uid, ids, ['object', 'name'], context)
-        return [(r['object'], r['name']) for r in res]
 
     def _default_name(self, cr, uid, context=None):
         if context and context.get('reference_model', False):
@@ -343,12 +368,6 @@ class qc_test(osv.osv):
                     break
             result[test.id] = success
         return result
-
-    def _links_get(self, cr, uid, context=None):
-        obj = self.pool.get('res.request.link')
-        ids = obj.search(cr, uid, [], context=context)
-        res = obj.read(cr, uid, ids, ['object', 'name'], context)
-        return [(r['object'], r['name']) for r in res]
 
     def _default_object_id(self, cr, uid, context=None):
         if context and context.get('reference_model', False):
