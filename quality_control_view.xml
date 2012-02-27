@@ -396,6 +396,34 @@
     </field>
   </record>
 
+
+        <record model="ir.ui.view" id="qc_test_filter_view">
+            <field name="name">qc.test.filter</field>
+            <field name="model">qc.test</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Test Filter">
+                    <group col="10" colspan="4">
+                        <filter icon="terp-document-new" name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                        <filter icon="terp-gtk-media-pause" name="waiting" string="Waiting" domain="[('state', '=', 'waiting')]"/>
+                        <filter icon="terp-check" name="approved" string="Approved" domain="[('state', 'in', ('fail', 'success'))]"/>
+                        <separator orientation="vertical"/>
+                        <filter icon="terp-camera_test" name="success" string="Success" domain="[('success', '=', True)]"/>
+                        <filter icon="terp-dialog-close" name="no-success" string="Not success" domain="[('success', '=', False)]"/>
+                        <separator orientation="vertical"/>
+                        <field name="name"/>
+                        <field name="test_template_id"/>
+                        <field name="date"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Group By..." colspan="4" col="8">
+                        <filter string="State" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
   <record model="ir.actions.act_window" id="action_qc_new_test">
     <field name="name">Test</field>
     <field name="res_model">qc.test</field>
