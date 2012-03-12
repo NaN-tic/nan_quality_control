@@ -427,6 +427,7 @@ class qc_test(osv.osv):
                 obj.pool.get('ir.sequence').get(cr, uid, 'qc.test'),
         'date' : lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
         'state': 'draft',
+        'success': False,
         'object_id': _default_object_id,
         'company_id':  lambda s, cr, uid, c: s.pool.get('res.company')\
                 ._company_default_get(cr, uid, 'qc.test', context=c), 
