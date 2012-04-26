@@ -432,67 +432,72 @@ class qc_test(osv.osv):
         'company_id':  lambda s, cr, uid, c: s.pool.get('res.company')\
                 ._company_default_get(cr, uid, 'qc.test', context=c), 
     }
-    
+
+    # qc.test
+    def _calc_line_vals_from_template(self, cr, uid, test_id, template_line,
+            fill_correct_values, context):
+        data = {
+            'name': template_line.name,
+            'test_id': test_id,
+            'method_id': template_line.method_id.id,
+            'proof_id': template_line.proof_id.id,
+            'test_template_line_id': template_line.id,
+            'notes': template_line.notes,
+            'min_value': template_line.min_value,
+            'max_value': template_line.max_value,
+            'uom_id': template_line.uom_id.id,
+            'test_uom_id': template_line.uom_id.id,
+            'proof_type': template_line.proof_id.type,
+        }
+        if fill_correct_values:
+            if template_line.type == 'qualitative':
+                # Fill with the first correct value found.
+                data['actual_value_ql'] = (len(template_line.valid_value_ids)
+                        and template_line.valid_value_ids[0]
+                        and template_line.valid_value_ids[0].id
+                        or False)
+            else:
+                # Fill with value in the range.
+                data['actual_value_qt'] = template_line.min_value
+                data['test_uom_id'] = template_line.uom_id.id
+        return data
+
     # qc.test
     def set_test_template(self, cr, uid, ids, template_id, force_fill=False,
                 context=None):
+        test_line_proxy = self.pool.get('qc.test.line')
+
         if context is None:
-            context={}
+            context = {}
         template = self.pool.get('qc.test.template').browse(cr, uid,
                 template_id, context=context)
-        for id in ids:
-            self.pool.get('qc.test').write( cr, uid, id, {
-                'test_template_id' : template_id,
-                'formula':template.formula,
-                'uom_id': template.uom_id and template.uom_id.id 
+        for test_id in ids:
+            self.write(cr, uid, test_id, {
+                'test_template_id': template_id,
+                'formula': template.formula,
+                'uom_id': template.uom_id and template.uom_id.id
             }, context)
-            
-            test = self.pool.get('qc.test').browse( cr, uid, id, context )
-            
+
+            test = self.browse(cr, uid, test_id, context)
+
             if len(test.test_line_ids) > 0:
-                self.pool.get('qc.test.line').unlink(cr, uid, 
+                test_line_proxy.unlink(cr, uid,
                         [x.id for x in test.test_line_ids], context)
-            
-            fill=False
-            if test.test_template_id.fill_correct_values:
-                fill=True
-            
+
+            fill = test.test_template_id.fill_correct_values or False
             for line in test.test_template_id.test_template_line_ids:
-                data = {
-                    'name':line.name,
-                    'test_id': id,
-                    'method_id': line.method_id.id,
-                    'proof_id': line.proof_id.id,
-                    'test_template_line_id': line.id,
-                    'notes': line.notes,
-                    'min_value': line.min_value,
-                    'max_value': line.max_value,
-                    'uom_id': line.uom_id.id,
-                    'test_uom_id': line.uom_id.id,
-                    'proof_type': line.proof_id.type,
-                }
-                
-                if fill or force_fill :
-                    if line.type == 'qualitative':
-                        # Fill with the first correct value found.
-                        data['actual_value_ql'] = len(line.valid_value_ids) and\
-                                line.valid_value_ids[0] and \
-                                line.valid_value_ids[0].id or False
-                    
-                    else:
-                        # Fill with value in the range.
-                        data['actual_value_qt'] =line.min_value
-                        data['test_uom_id'] = line.uom_id.id
-                
-                test_line_id = self.pool.get('qc.test.line').create(cr, uid, 
+                data = self._calc_line_vals_from_template(cr, uid, test_id,
+                        line, fill or force_fill, context)
+
+                test_line_id = test_line_proxy.create(cr, uid,
                         data, context)
-                self.pool.get('qc.test.line').write(cr, uid, [test_line_id], {
-                        'valid_value_ids': [
-                                (6, 0, [x.id for x in line.valid_value_ids ]),
-                        ],
-                    })
-    
-    
+                test_line_proxy.write(cr, uid, [test_line_id], {
+                            'valid_value_ids': [
+                                (6, 0, [x.id for x in line.valid_value_ids]),
+                            ],
+                        }, context)
+        return True
+
     # qc.test
     def test_state(self, cr, uid, ids, mode, context):
         '''
