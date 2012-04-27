@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.12\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-08-10 14:43+0000\n"
+"POT-Creation-Date: 2012-04-27 10:15+0000\n"
 "PO-Revision-Date: 2012-02-14 15:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <>\n"
@@ -47,22 +47,6 @@ msgid "qc.test.set.template.wizard"
 msgstr ""
 
 #. module: nan_quality_control
-#: field:qc.test.line,uom_id:0 field:qc.test.template.line,uom_id:0
-msgid "Uom"
-msgstr "UdM"
-
-#. module: nan_quality_control
-#: model:ir.module.module,description:nan_quality_control.module_meta_information
-msgid ""
-"This module provides a generic infrastructure for quality tests. The idea is "
-"that it can be later be reused for doing quality tests in production lots "
-"but also in any other areas a company may desire."
-msgstr ""
-"Aquest mòdul proveeix una infraestructura genèrica per a tests de calitat. La "
-"idea és poder extendre els tests als diferents models que la companyia "
-"desitgi."
-
-#. module: nan_quality_control
 #: model:ir.model,name:nan_quality_control.model_qc_test_template_line
 msgid "qc.test.template.line"
 msgstr ""
@@ -78,6 +62,16 @@ msgid "qc.proof.synonym"
 msgstr ""
 
 #. module: nan_quality_control
+#: field:qc.posible.value,company_id:0 field:qc.proof,company_id:0
+#: field:qc.proof.method,company_id:0 field:qc.proof.synonym,company_id:0
+#: field:qc.test,company_id:0 field:qc.test.line,company_id:0
+#: field:qc.test.template,company_id:0
+#: field:qc.test.template.category,company_id:0
+#: field:qc.test.template.line,company_id:0
+msgid "Company"
+msgstr "Company"
+
+#. module: nan_quality_control
 #: field:qc.test.template,object_id:0
 msgid "Reference Object"
 msgstr "Objecte referència"
@@ -91,6 +85,13 @@ msgstr "Línies de plantilla"
 #: field:qc.test.line,success:0
 msgid "Success?"
 msgstr "Correcte?"
+
+#. module: nan_quality_control
+#: field:qc.test,uom_id:0 field:qc.test.line,uom_id:0
+#: field:qc.test.template,uom_id:0 field:qc.test.template.line,uom_id:0
+#, fuzzy
+msgid "UoM"
+msgstr "UdM"
 
 #. module: nan_quality_control
 #: model:ir.actions.act_window,name:nan_quality_control.action_qc_test_template
@@ -112,6 +113,7 @@ msgid "Proof Type"
 msgstr "Tipus de prova"
 
 #. module: nan_quality_control
+#: model:ir.actions.act_window,name:nan_quality_control.action_qc_proof
 #: model:ir.ui.menu,name:nan_quality_control.qc_proof_menu view:qc.proof:0
 #: field:qc.proof.synonym,proof_id:0 field:qc.test.line,proof_id:0
 #: field:qc.test.template.line,proof_id:0
@@ -258,6 +260,12 @@ msgid "Full Name"
 msgstr "Nom complet"
 
 #. module: nan_quality_control
+#: code:addons/nan_quality_control/quality_control.py:452
+#, python-format
+msgid "Error:"
+msgstr "Error:"
+
+#. module: nan_quality_control
 #: field:qc.test.line,actual_value_ql:0
 msgid "Ql.Value"
 msgstr "Valor Ql."
@@ -286,11 +294,6 @@ msgid "referenced"
 msgstr "referenciat"
 
 #. module: nan_quality_control
-#: view:qc.test:0
-msgid "Calculate"
-msgstr "Calcula"
-
-#. module: nan_quality_control
 #: model:ir.module.module,shortdesc:nan_quality_control.module_meta_information
 #: model:ir.ui.menu,name:nan_quality_control.qc_menu
 msgid "Quality Control"
@@ -300,6 +303,12 @@ msgstr "Control de Qualitat"
 #: field:qc.test.template.category,name:0
 msgid "Category Name"
 msgstr "Nom categoria"
+
+#. module: nan_quality_control
+#: model:ir.model,name:nan_quality_control.model_qc_test_link
+#, fuzzy
+msgid "Test Reference Types"
+msgstr "Referència"
 
 #. module: nan_quality_control
 #: model:ir.model,name:nan_quality_control.model_qc_proof_method
@@ -339,11 +348,6 @@ msgid "Test Method"
 msgstr "Mètode del test"
 
 #. module: nan_quality_control
-#: model:ir.model,name:nan_quality_control.model_qc_test_template_trigger
-msgid "qc.test.template.trigger"
-msgstr ""
-
-#. module: nan_quality_control
 #: field:qc.test,success:0
 msgid "Success"
 msgstr "Èxit"
@@ -352,6 +356,11 @@ msgstr "Èxit"
 #: help:qc.test.line,test_uom_id:0
 msgid "UoM of the value of the result if it is a quantitative proof."
 msgstr "Udm del valor del resultat, si es tracta d'una prova quantitativa"
+
+#. module: nan_quality_control
+#: constraint:qc.test.template.line:0
+msgid "Too many Check Weight lines"
+msgstr "Too many Check Weight lines"
 
 #. module: nan_quality_control
 #: field:qc.test.line,test_uom_id:0
@@ -412,11 +421,6 @@ msgid "Cancel"
 msgstr "Cancel·la"
 
 #. module: nan_quality_control
-#: model:ir.actions.act_window,name:nan_quality_control.action_qc_proof
-msgid "proof"
-msgstr "prova"
-
-#. module: nan_quality_control
 #: field:qc.test.line,min_value:0 field:qc.test.template.line,min_value:0
 msgid "Min"
 msgstr "Min."
@@ -458,7 +462,7 @@ msgid "This field will be active if all tests have succeeded."
 msgstr "Aquest camp s'activa si totes les proves han tingut èxit."
 
 #. module: nan_quality_control
-#: field:qc.test.line,notes:0 view:qc.test.template.line:0
+#: view:qc.test:0 field:qc.test.line,notes:0 view:qc.test.template.line:0
 #: field:qc.test.template.line,notes:0
 msgid "Notes"
 msgstr "Notes"
@@ -519,8 +523,27 @@ msgid "Accept"
 msgstr "Accepta"
 
 #. module: nan_quality_control
+#: model:ir.module.module,description:nan_quality_control.module_meta_information
+#, fuzzy
+msgid ""
+"\n"
+"This module provides a generic infrastructure for quality tests. The idea is "
+"that it can be later be reused for doing quality tests in production lots "
+"but also in any other areas a company may desire.\n"
+"\n"
+"Developed for Trod y Avia, S.L."
+msgstr ""
+"Aquest mòdul proveeix una infraestructura genèrica per a tests de calitat. "
+"La idea és poder extendre els tests als diferents models que la companyia "
+"desitgi."
+
+#. module: nan_quality_control
 #: help:qc.test.template.category,active:0
 msgid "The active field allows you to hide the category without removing it."
 msgstr "El camp actiu permet oculta una categoria sense eliminar-la."
 
+#~ msgid "Calculate"
+#~ msgstr "Calcula"
 
+#~ msgid "proof"
+#~ msgstr "prova"
