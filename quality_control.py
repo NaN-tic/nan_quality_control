@@ -589,28 +589,28 @@ class qc_test(osv.osv):
         return False
 
     # qc.test
-    def action_wofkflow_draft(self, cr, uid, ids, context=None):
+    def action_workflow_draft(self, cr, uid, ids, context=None):
         self.write(cr, uid, ids, {
                     'state': 'draft'
                 }, context)
         return True
 
     # qc.test
-    def action_wofkflow_waiting(self, cr, uid, ids, context=None):
+    def action_workflow_waiting(self, cr, uid, ids, context=None):
         self.write(cr, uid, ids, {
                     'state': 'waiting'
                 }, context)
         return True
 
     # qc.test
-    def action_wofkflow_success(self, cr, uid, ids, context=None):
+    def action_workflow_success(self, cr, uid, ids, context=None):
         self.write(cr, uid, ids, {
                     'state': 'success'
                 }, context)
         return True
 
     # qc.test
-    def action_wofkflow_failed(self, cr, uid, ids, context=None):
+    def action_workflow_failed(self, cr, uid, ids, context=None):
         self.write(cr, uid, ids, {
                     'state': 'failed'
                 }, context)
