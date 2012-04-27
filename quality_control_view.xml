@@ -320,7 +320,7 @@
             </group>
           </page>
         </notebook>
-        <group col="9" colspan="4">
+        <group col="12" colspan="4">
           <field name="state" readonly="True" select="1"/>
           <field name="success"/>
           <field name="formula_result"/>
