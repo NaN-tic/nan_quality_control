@@ -13,28 +13,28 @@
         <field name="flow_start">True</field>
         <field name="name">draft</field>
         <field name="kind">function</field>
-        <field name="action">action_wofkflow_draft()</field>
+        <field name="action">action_workflow_draft()</field>
         <field name="signal_send">subflow.draft</field>
     </record>
     <record id="qc-waiting" model="workflow.activity">
         <field name="wkf_id" ref="wkf_qc_test"/>
         <field name="name">waiting</field>
         <field name="kind">function</field>
-        <field name="action">action_wofkflow_waiting()</field>
+        <field name="action">action_workflow_waiting()</field>
         <field name="signal_send">subflow.waiting</field>
     </record>
     <record id="qc-success" model="workflow.activity">
         <field name="wkf_id" ref="wkf_qc_test"/>
         <field name="name">success</field>
         <field name="kind">function</field>
-        <field name="action">action_wofkflow_success()</field>
+        <field name="action">action_workflow_success()</field>
         <field name="signal_send">subflow.success</field>
     </record>
     <record id="qc-failed" model="workflow.activity">
         <field name="wkf_id" ref="wkf_qc_test"/>
         <field name="name">failed</field>
         <field name="kind">function</field>
-        <field name="action">action_wofkflow_failed()</field>
+        <field name="action">action_workflow_failed()</field>
         <field name="signal_send">subflow.failed</field>
     </record>
 
