@@ -202,7 +202,7 @@ qc_proof_synonym()
 
 def _links_get(self, cr, uid, context={}):
     """
-    Returns a list of tuples of 'model names' and 'Model title' to use as 
+    Returns a list of tuples of 'model names' and 'Model title' to use as
     typs in reference fields.
     """
     test_link_proxy = self.pool.get('qc.test.link')
@@ -210,28 +210,29 @@ def _links_get(self, cr, uid, context={}):
     res = test_link_proxy.read(cr, uid, ids, ['object', 'name'], context)
     return [(r['object'], r['name']) for r in res]
 
+
 class qc_test_link(osv.osv):
     """
-    This model is used to manage available models to link in the Reference 
+    This model is used to manage available models to link in the Reference
     fields of qc.test and qc.test.template
     """
     _name = 'qc.test.link'
     _description = "Test Reference Types"
     _order = 'priority'
-    
+
     _columns = {
         'name': fields.char('Name', size=64, required=True, translate=True),
         'object': fields.char('Object', size=64, required=True),
         'priority': fields.integer('Priority'),
     }
-    
+
     _defaults = {
         'priority': 5,
     }
 qc_test_link()
 
 
-class qc_test_template_category( osv.osv):
+class qc_test_template_category(osv.osv):
     """
     This model is used to categorize proof templates.
     """
@@ -436,6 +437,7 @@ class qc_test(osv.osv):
                 if not proof[p]:
                     success = False
                     break
+
             result[test.id] = success
         return result
 
@@ -565,10 +567,10 @@ class qc_test(osv.osv):
                 template_id, context=context)
         for test_id in ids:
             self.write(cr, uid, test_id, {
-                'test_template_id': template_id,
-                'formula': template.formula,
-                'uom_id': template.uom_id and template.uom_id.id
-            }, context)
+                        'test_template_id': template_id,
+                        'formula': template.formula,
+                        'uom_id': template.uom_id and template.uom_id.id
+                    }, context)
 
             test = self.browse(cr, uid, test_id, context)
 
@@ -588,6 +590,11 @@ class qc_test(osv.osv):
                                 (6, 0, [x.id for x in line.valid_value_ids]),
                             ],
                         }, context)
+            # It writes again the test to force to recalculate 'success' field
+            self.write(cr, uid, test_id, {
+                        'formula': template.formula,
+                        'uom_id': template.uom_id and template.uom_id.id
+                    }, context)
         return True
 
     # qc.test
