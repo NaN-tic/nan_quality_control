@@ -435,7 +435,7 @@
     <field name="model">qc.test.line</field>
     <field name="type">form</field>
     <field name="arch" type="xml">
-      <form string="Test Line" >
+      <form string="Test Line" >    
         <field name="name"/>
         <field name="company_id"/>
         <group colspan="4" attrs="{'invisible':[('proof_type','=','qualitative')]}">
@@ -448,6 +448,29 @@
           <field name="actual_value_ql" />
         </group>
 
+        <notebook colspan="4">
+            <page string="Check Values">
+                <group col="6" colspan="4" >
+                    <field name="proof_id"/>
+                    <field name="method_id"/>
+                    <field name="proof_type"/>
+                </group>
+                <group col="1" colspan="4"  attrs="{'invisible':[('proof_type','!=','qualitative')]}"> 
+                    <separator string="Values" />
+                </group>
+                <field name="valid_value_ids" attrs="{'invisible':[('proof_type','!=','qualitative')]}" colspan="4" nolabel="1"/>
+                <group col="6" colspan="4"  attrs="{'invisible':[('proof_type','=','qualitative')]}">
+                    <field name="min_value"/>
+                    <field name="max_value"/>
+                    <field name="uom_id" />
+                </group>
+            </page>
+            <page string="notes">
+                <field name="notes" colspan="4" nolabel="1" />
+            </page>
+        </notebook>
+
+    <!--
         <separator string="Check Values" colspan="4" />
         <group col="6" colspan="4" >
             <field name="proof_id"/>
@@ -465,6 +488,7 @@
 
         <separator string="notes" colspan="4"/>
         <field name="notes" colspan="4" nolabel="1" />
+        -->
         <field name="success"/> 
       </form>
     </field>
