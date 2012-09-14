@@ -119,12 +119,9 @@
           <field name="company_id"/>
           <field name="active" />
         </group>
-        <group col="2" colspan="4">
-          <field name="synonym_ids" nolabel="1"/>
-          <group attrs="{'invisible':[('type','!=','qualitative')]}" col="2" colspan="2" >
-            <field name="value_ids" nolabel="1" colspan="2" attrs="{'required':[('type','=','qualitative')]}" />
-          </group>
-        </group>
+        <newline/>
+        <field name="value_ids" nolabel="1" colspan="2" attrs="{'required':[('type','=','qualitative')],'readonly':[('type','!=','qualitative')] }" />
+        <field name="synonym_ids" nolabel="1" colspan="2"/>
       </form>
     </field>
   </record>
