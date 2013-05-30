@@ -9,11 +9,9 @@
             <field name="arch" type="xml">
                 <form string="Proof Method" version="7.0">
                     <sheet>
-                        <group col="4">
+                        <group col="4" colspan='3'>
                             <field name="name"/>
                             <field name="company_id"/>
-                        </group>
-                        <group col="2">
                             <field name="active"/>
                         </group>
                     </sheet>
@@ -48,10 +46,10 @@
             <field name="arch" type="xml">
                 <form string="Proof Posible Value" version="7.0">
                     <sheet>
-                        <group col="4">
+                        <group col="4"  colspan='3'>
                             <field name="name"/>
-                            <field name="active"/>
                             <field name="company_id"/>
+                            <field name="active"/>
                         </group>
                     </sheet>
 
@@ -87,12 +85,11 @@
             <field name="arch" type="xml">
                 <form string="Proof Synonym" version="7.0">
                     <sheet>
-                        <group>
+                        <group col="4" colspan="2">
                             <field name="name"/>
                             <field name="company_id"/>
                         </group>
                     </sheet>
-
                 </form>
             </field>
         </record>
@@ -124,7 +121,7 @@
             <field name="arch" type="xml">
                 <form string="Proof" version="7.0">
                     <sheet>
-                        <group>
+                        <group col="4" colspan="2">
                             <field name="name"/>
                             <field name="ref"/>
                             <field name="type"/>
@@ -132,9 +129,11 @@
                             <field name="active"/>
                         </group>
                         <newline/>
+                        <group col="4" colspan="2">
                         <field name="value_ids" nolabel="1" colspan="2"
                                attrs="{'required':[('type','=','qualitative')],'readonly':[('type','!=','qualitative')] }"/>
                         <field name="synonym_ids" nolabel="1" colspan="2"/>
+                        </group>
 
                     </sheet>
                 </form>
@@ -171,9 +170,11 @@
             <field name="arch" type="xml">
                 <form string="Test Reference Type" version="7.0">
                     <sheet>
+                        <group col="4" colspan="3">
                         <field name="name"/>
                         <field name="object"/>
                         <field name="priority"/>
+                        </group>
                     </sheet>
                 </form>
             </field>
@@ -222,21 +223,25 @@
             <field name="arch" type="xml">
                 <form string="Test Template" version="7.0">
                     <sheet>
-                        <group col="10" colspan="4">
+                        <group col="4" colspan="1">
                             <field name="name"/>
                             <field name="type"/>
+                        </group>
+                        <group col="4" colspan="2">
                             <field name="company_id"/>
                             <field name="active"/>
-                        </group>
                         <field name="category_id"/>
                         <field name="fill_correct_values"/>
-                        <group col="2" colspan="4" attrs="{'invisible':[('type','=','generic')]}">
+                        </group>
+                        <group col="4" colspan="2" attrs="{'invisible':[('type','=','generic')]}">
                             <field name="object_id"/>
                         </group>
+                        <group col="4" colspan="2">
                         <field name="test_template_line_ids" nolabel="1" colspan="4"/>
                         <separator string="Formula" colspan="4"/>
-                        <field name="formula" colspan="4" nolabel="1"/>
+                        <field name="formula" colspan="3" nolabel="1"/>
                         <field name="uom_id"/>
+                        </group>
                     </sheet>
                 </form>
             </field>
@@ -275,7 +280,7 @@
                     <sheet>
                         <field name="name"/>
                         <field name="company_id"/>
-                        <group col="10" colspan="4">
+                        <group col="4" colspan="2">
                             <field name="proof_id" on_change="onchange_proof_id(proof_id,context)"/>
                             <field name="method_id"/>
                             <field name="type"/>
@@ -284,7 +289,7 @@
 
                         <notebook colspan="4">
                             <page string="Values">
-                                <group col="2" colspan="4" attrs="{'invisible':[('type','!=','qualitative')]}">
+                                <group col="4" colspan="2" attrs="{'invisible':[('type','!=','qualitative')]}">
                                     <separator string="Values" colspan="4"/>
                                 </group>
 
@@ -293,7 +298,7 @@
                                        attrs="{'invisible':[('type','!=','qualitative')],'required':[('type','=','qualitative')]}"
                                        context="{'proof_id':proof_id}" nolabel="1"/>
 
-                                <group col="6" colspan="4" attrs="{'invisible':[('type','=','qualitative')]}">
+                                <group col="6" colspan="3" attrs="{'invisible':[('type','=','qualitative')]}">
                                     <field name="min_value" attrs="{'required':[('type','!=','qualitative')]}"/>
                                     <field name="max_value" attrs="{'required':[('type','!=','qualitative')]}"/>
                                     <field name="uom_id" attrs="{'required':[('type','!=','qualitative')]}"/>
@@ -374,12 +379,12 @@
             <field name="arch" type="xml">
                 <form string="Test" version="7.0">
                     <sheet>
-                        <group col="6" colspan="4">
+                        <group col="6" colspan="3">
                             <field name="name" select="1"/>
                             <field name="date"/>
                             <field name="company_id"/>
                         </group>
-                        <group col="5" colspan="4">
+                        <group col="6" colspan="3">
                             <field name="object_id"/>
                             <field name="test_template_id" readonly="True" select="1"/>
                             <button string="Select Template" name="%(action_qc_test_set_template_wizard_form)d"
@@ -439,7 +444,7 @@
             <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Test Filter">
-                    <group col="10" colspan="4">
+                    <group col="4" colspan="2">
                         <filter icon="terp-document-new" name="draft" string="Draft"
                                 domain="[('state', '=', 'draft')]"/>
                         <filter icon="terp-gtk-media-pause" name="waiting" string="Waiting"
@@ -614,6 +619,7 @@
                 parent="qc_menu"
                 id="qc_test_menu"
                 action="action_qc_new_test"
+                sequence="0"
                 />
         <menuitem
                 name="Test Lines"
@@ -628,6 +634,7 @@
                 id="qc_test_link_menu"
                 action="qc_test_link_act"
                 groups="base.group_system"
+                sequence="9"
                 />
 
     </data>
