@@ -265,6 +265,8 @@
 						<group col="4" colspan="2">
 							<field name="name"/>
 							<field name="company_id"/>
+						</group>
+						<group col="4" colspan="2">
 							<field name="proof_id" on_change="onchange_proof_id(proof_id,context)"/>
 							<field name="method_id"/>
 							<field name="type"/>
@@ -274,10 +276,10 @@
 							<page string="Values">
 								<group col="4" colspan="2" attrs="{'invisible':[('type','!=','qualitative')]}">
 									<separator string="Values" colspan="4"/>
+									<field name="valid_value_ids" colspan="4"
+									attrs="{'invisible':[('type','!=','qualitative')],'required':[('type','=','qualitative')]}"
+									context="{'proof_id':proof_id}" nolabel="1"/>
 								</group>
-								<field name="valid_value_ids" colspan="4"
-								attrs="{'invisible':[('type','!=','qualitative')],'required':[('type','=','qualitative')]}"
-								context="{'proof_id':proof_id}" nolabel="1"/>
 								<group col="6" colspan="3" attrs="{'invisible':[('type','=','qualitative')]}">
 									<field name="min_value" attrs="{'required':[('type','!=','qualitative')]}"/>
 									<field name="max_value" attrs="{'required':[('type','!=','qualitative')]}"/>
@@ -285,7 +287,7 @@
 								</group>
 							</page>
 							<page string="Notes">
-								<field name="notes" colspan="4" nolabel="1"/>
+								<field name="notes" colspan="4" rowspan="8" nolabel="1"/>
 							</page>
 						</notebook>
 					</sheet>
