@@ -327,8 +327,8 @@
             <field name="arch" type="xml">
                 <form string="Select Test Template" version="7.0">
                     <sheet>
-                        <field name="test_template_id"/>
-                        <group col="2" colspan="2">
+                        <group colspan="6">
+                            <field name="test_template_id"/>
                             <button icon="gtk-cancel" special="cancel" string="Cancel" name="action_cancel"
                                     type="object"/>
                             <button icon="gtk-ok" name="action_create_test" string="Accept" type="object"/>
@@ -354,44 +354,53 @@
             <field name="arch" type="xml">
                 <form string="Test" version="7.0">
                     <sheet>
-                        <group col="6" colspan="3">
-                            <field name="name" select="1"/>
-                            <field name="date"/>
-                            <field name="company_id"/>
+                        <group colspan="4">
+                            <group>
+                                <field name="name" select="1"/>
+                                <field name="date"/>
+                                <field name="company_id"/>
+                                <field name="object_id"/>
+                            </group>
+                            <group>
+                                <field name="test_template_id"/>
+                                <!--
+                                <button string="Select template" name="%(action_qc_test_set_template_wizard_form)d"
+                                        type="action" states="draft"/>
+                                        -->
+                                <field name="state" readonly="True" select="1"/>
+                                <field name="success"/>
+                                <field name="formula_result"/>
+                                <field name="uom_id"/>
+                            </group>
                         </group>
-                        <group col="6" colspan="3">
-                            <field name="object_id"/>
-                            <field name="test_template_id" readonly="True" select="1"/>
-                            <button string="Select Template" name="%(action_qc_test_set_template_wizard_form)d"
-                                    type="action" states="draft"/>
-                        </group>
-                        <notebook colspan="4">
-                            <page string="Values">
-                                <field name="test_line_ids" nolabel="1" colspan="4"/>
-                                <separator string="Formula" colspan="4"/>
-                                <field name="formula" colspan="4" nolabel="1"/>
-                            </page>
-                            <page string="Notes">
-                                <group col="1" colspan="2">
-                                    <separator string="Internal Note"/>
-                                    <field name="test_internal_note" nolabel="1" select="2"/>
-                                </group>
-                                <group col="1" colspan="2">
-                                    <separator string="External Note"/>
-                                    <field name="test_external_note" nolabel="1" select="2"/>
-                                </group>
-                            </page>
-                        </notebook>
-                        <group col="12" colspan="4">
-                            <field name="state" readonly="True" select="1"/>
-                            <field name="success"/>
-                            <field name="formula_result"/>
-                            <field name="uom_id"/>
+                        <group>
                             <button name="confirm" states="draft" string="Confirm" icon="gtk-ok"/>
                             <button name="approve" states="waiting" string="Approve"
                                     groups="nan_quality_control.group_quality_control_supervisor" icon="gtk-ok"/>
-                            <button name="cancel" states="waiting,failed,success" string="Cancel" icon="gtk-cancel"/>
+                            <button name="cancel" states="waiting,failed,success" string="Cancel"
+                                    icon="gtk-cancel"/>
                         </group>
+                        <notebook>
+                            <page string="Values">
+                                <group>
+                                    <field name="test_line_ids" nolabel="1" colspan="4"/>
+                                    <separator string="Formula" colspan="4"/>
+                                    <field name="formula" colspan="4" nolabel="1"/>
+                                </group>
+                            </page>
+                            <page string="Notes">
+                                <group>
+                                    <group>
+                                        <separator string="Internal Note"/>
+                                        <field name="test_internal_note" nolabel="1" select="2"/>
+                                    </group>
+                                    <group>
+                                        <separator string="External Note"/>
+                                        <field name="test_external_note" nolabel="1" select="2"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -445,7 +454,7 @@
             <field name="name">Test</field>
             <field name="res_model">qc.test</field>
             <field name="view_type">form</field>
-            <field name="view_mode">form,tree</field>
+            <field name="view_mode">tree,form</field>
         </record>
 
         <!-- qc.test.line -->
@@ -456,20 +465,25 @@
             <field name="arch" type="xml">
                 <form string="Test Line" version="7.0">
                     <sheet>
-                        <group col="4" colspan="2" attrs="{'invisible':[('proof_type','=','qualitative')]}">
-                            <field name="name"/>
-                            <field name="company_id"/>
+                        <group>
+                            <group colspan="2" attrs="{'invisible':[('proof_type','=','qualitative')]}">
+                                <field name="name"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group colspan="2" attrs="{'invisible':[('proof_type','=','qualitative')]}">
+                                <separator string="Test Result" colspan="4"/>
+                                <field name="actual_value_qt"/>
+                                <field name="test_uom_id"/>
+                            </group>
+                            <group colspan="2" attrs="{'invisible':[('proof_type','!=','qualitative')]}">
+                                <separator string="Test Values" colspan="2"/>
+                                <field name="actual_value_ql"/>
+                            </group>
                         </group>
-                        <group colspan="2" attrs="{'invisible':[('proof_type','=','qualitative')]}">
-                            <separator string="Test Result" colspan="4"/>
-                            <field name="actual_value_qt"/>
-                            <field name="test_uom_id"/>
-                        </group>
-                        <group col="2" colspan="4" attrs="{'invisible':[('proof_type','!=','qualitative')]}">
-                            <separator string="Test Values" colspan="2"/>
-                            <field name="actual_value_ql"/>
-                        </group>
-                        <notebook colspan="2">
+
+                        <field name="success" colspan="4"/>
+
+                        <notebook>
                             <page string="Check Values">
                                 <group col="6" colspan="3">
                                     <field name="proof_id"/>
@@ -487,8 +501,8 @@
                                     <field name="uom_id"/>
                                 </group>
                             </page>
-                            <page string="notes">
-                                <field name="notes" colspan="2" nolabel="0"/>
+                            <page string="Notes" colspan="4">
+                                <field name="notes" colspan="4" rowspan="4" nolabel="0"/>
                             </page>
                         </notebook>
 
@@ -511,7 +525,6 @@
                         <separator string="notes" colspan="4"/>
                         <field name="notes" colspan="4" nolabel="1" />
                         -->
-                        <field name="success"/>
                     </sheet>
                 </form>
             </field>
@@ -544,62 +557,65 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
-        <menuitem name="Quality Control" id="qc_menu"/>
-        <menuitem parent="qc_menu" name="Configuration" id="qc_menu_config"/>
+
+        <menuitem
+                name="Quality Control"
+                id="qc_menu"
+                groups="group_quality_control_user"
+                />
+        <menuitem
+                parent="qc_menu"
+                name="Configuration"
+                id="qc_menu_config"
+                groups="group_quality_control_manager"
+                />
+        <menuitem
+                parent="qc_menu_config"
+                name="Meta Data"
+                id="qc_menu_config_meta"
+                groups="group_quality_control_manager"
+                />
         <menuitem
                 name="Method"
-                parent="qc_menu_config"
+                parent="qc_menu_config_meta"
                 id="qc_proof_method_menu"
                 action="action_qc_proof_method"
-                sequence="1"
                 />
         <menuitem
                 name="Posible Values"
-                parent="qc_menu_config"
+                parent="qc_menu_config_meta"
                 id="qc_proof_posible_value_menu"
                 action="action_qc_posible_value"
-                sequence="2"
                 />
         <menuitem
                 name="Test Template"
                 parent="qc_menu_config"
                 id="qc_test_template_menu"
                 action="action_qc_test_template"
-                sequence="3"
-                />
-        <menuitem
-                name="Test Template Lines"
-                parent="qc_test_template_menu"
-                id="qc_test_template_line_menu"
-                action="action_qc_test_template_line"
+                sequence="0"
                 />
         <menuitem
                 name="Proof"
-                parent="qc_menu_config"
+                parent="qc_menu_config_meta"
                 id="qc_proof_menu"
                 action="action_qc_proof"
-                sequence="0"
+                />
+        <menuitem
+                name="QC Tests"
+                parent="qc_menu"
+                id="qc_test_menu"
                 />
         <menuitem
                 name="Tests"
-                parent="qc_menu"
-                id="qc_test_menu"
-                action="action_qc_new_test"
-                sequence="0"
-                />
-        <menuitem
-                name="Test Lines"
                 parent="qc_test_menu"
-                id="qc_test_lines_menu"
-                action="action_qc_test_line"
+                id="qc_test_line_menu"
+                action="action_qc_new_test"
                 />
         <menuitem
                 name="Test Links"
                 parent="qc_menu_config"
                 id="qc_test_link_menu"
                 action="qc_test_link_act"
-                groups="base.group_system"
-                sequence="4"
                 />
 
     </data>

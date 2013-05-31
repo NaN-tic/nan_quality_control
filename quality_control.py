@@ -481,7 +481,7 @@ class qc_test(osv.osv):
                 size=128, readonly=True, select=True, states={
                     'draft': [('readonly', False)],
                 }),
-        'test_template_id': fields.many2one('qc.test.template', 'Test',
+        'test_template_id': fields.many2one('qc.test.template', 'Test template',
                 select=True, states={
                     'success': [('readonly', True)],
                     'failed': [('readonly', True)],
