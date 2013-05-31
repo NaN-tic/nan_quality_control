@@ -568,6 +568,7 @@
                 name="Configuration"
                 id="qc_menu_config"
                 groups="group_quality_control_manager"
+                sequence="90"
                 />
         <menuitem
                 parent="qc_menu_config"
