@@ -9,7 +9,7 @@
       <field name="arch" type="xml">
         <form string="Proof Method" version="7.0">
           <sheet>
-            <group col="4" colspan='3'>
+            <group col="4" colspan="2">
               <field name="name"/>
               <field name="company_id"/>
               <field name="active"/>
@@ -18,17 +18,19 @@
         </form>
       </field>
     </record>
+
     <record model="ir.ui.view" id="qc_proof_method_tree_view">
       <field name="name">qc.proof.method.tree</field>
       <field name="model">qc.proof.method</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree string="Test Method">
+        <tree string="Proof Method">
           <field name="name"/>
           <field name="company_id"/>
         </tree>
       </field>
     </record>
+
     <record model="ir.actions.act_window" id="action_qc_proof_method">
       <field name="name">Methods</field>
       <field name="res_model">qc.proof.method</field>
@@ -44,27 +46,28 @@
       <field name="arch" type="xml">
         <form string="Proof Posible Value" version="7.0">
           <sheet>
-            <group col="4" colspan='3'>
+            <group col="4" colspan="2">
               <field name="name"/>
               <field name="company_id"/>
               <field name="active"/>
             </group>
           </sheet>
-
         </form>
       </field>
     </record>
+
     <record model="ir.ui.view" id="qc_posible_value_tree_view">
       <field name="name">qc.posible.value.tree</field>
       <field name="model">qc.posible.value</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree string="Posible Value">
+        <tree string="Proof Posible Value">
           <field name="name"/>
           <field name="company_id"/>
         </tree>
       </field>
     </record>
+
     <record model="ir.actions.act_window" id="action_qc_posible_value">
       <field name="name">Posible Values</field>
       <field name="res_model">qc.posible.value</field>
@@ -74,7 +77,7 @@
 
     <!-- qc.proof.synonym -->
     <record model="ir.ui.view" id="qc_proof_synonym_form_view">
-      <field name="name">qc.proof.synonym</field>
+      <field name="name">Proof Synonym</field>
       <field name="model">qc.proof.synonym</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
@@ -88,17 +91,19 @@
         </form>
       </field>
     </record>
+
     <record model="ir.ui.view" id="qc_test_synonym_tree_view">
       <field name="name">qc.proof.synonym.tree</field>
       <field name="model">qc.proof.synonym</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree string="Test Synonym">
+        <tree string="Proof Synonym">
           <field name="name"/>
           <field name="company_id"/>
         </tree>
       </field>
     </record>
+
     <record model="ir.actions.act_window" id="action_proof_synonym">
       <field name="name">Synonym</field>
       <field name="res_model">qc.proof.synonym</field>
@@ -122,16 +127,16 @@
               <field name="active"/>
             </group>
             <newline/>
-            <group col="2" colspan="1">
+            <group>
               <field name="value_ids" nolabel="0" colspan="1"
                      attrs="{'required':[('type','=','qualitative')],'readonly':[('type','!=','qualitative')] }"/>
               <field name="synonym_ids" nolabel="0" colspan="1"/>
             </group>
-
           </sheet>
         </form>
       </field>
     </record>
+
     <record model="ir.ui.view" id="qc_proof_tree_view">
       <field name="name">qc.proof.tree</field>
       <field name="model">qc.proof</field>
@@ -145,6 +150,7 @@
         </tree>
       </field>
     </record>
+
     <record model="ir.actions.act_window" id="action_qc_proof">
       <field name="name">Proof</field>
       <field name="res_model">qc.proof</field>
@@ -160,7 +166,7 @@
       <field name="arch" type="xml">
         <form string="Test Reference Type" version="7.0">
           <sheet>
-            <group col="4" colspan="3">
+            <group col="4" colspan="2">
               <field name="name"/>
               <field name="object"/>
               <field name="priority"/>
@@ -169,6 +175,7 @@
         </form>
       </field>
     </record>
+
     <record id="qc_test_link_tree" model="ir.ui.view">
       <field name="name">qc.test.link.form</field>
       <field name="model">qc.test.link</field>
@@ -180,6 +187,7 @@
         </tree>
       </field>
     </record>
+
     <record id="qc_test_link_search" model="ir.ui.view">
       <field name="name">qc.test.link.search</field>
       <field name="model">qc.test.link</field>
@@ -191,6 +199,7 @@
         </search>
       </field>
     </record>
+
     <record id="qc_test_link_act" model="ir.actions.act_window">
       <field name="name">Test Reference Types</field>
       <field name="type">ir.actions.act_window</field>
@@ -216,21 +225,22 @@
               <field name="company_id"/>
               <field name="fill_correct_values"/>
               <field name="active"/>
-              <field name="uom_id" colspan="2"/>
+              <field name="uom_id"/>
             </group>
             <separator/>
-            <group col="4" colspan="4" attrs="{'invisible':[('type','=','generic')]}">
+            <group attrs="{'invisible':[('type','=','generic')]}">
               <field name="object_id"/>
             </group>
-            <group col="4" colspan="2">
+            <group>
               <field name="test_template_line_ids" nolabel="1" colspan="4"/>
-              <separator string="Formula" colspan="4"/>
-              <field name="formula" colspan="2" nolabel="1"/>
+              <separator string="Formula"/>
+              <field name="formula" nolabel="1" colspan="2"/>
             </group>
           </sheet>
         </form>
       </field>
     </record>
+
     <record model="ir.ui.view" id="qc_test_template_tree_view">
       <field name="name">qc.test.template.tree</field>
       <field name="model">qc.test.template</field>
@@ -246,6 +256,7 @@
         </tree>
       </field>
     </record>
+
     <record model="ir.actions.act_window" id="action_qc_test_template">
       <field name="name">Test Template</field>
       <field name="res_model">qc.test.template</field>
@@ -260,37 +271,36 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Test Template Line" version="7.0">
-          <sheet>
-            <group col="4" colspan="2">
-              <field name="name"/>
-              <field name="company_id"/>
-              <field name="proof_id" on_change="onchange_proof_id(proof_id,context)"/>
-              <field name="method_id"/>
-              <field name="type"/>
-              <field name="sequence"/>
-            </group>
-            <notebook colspan="2">
-              <page string="Values">
-                <group col="4" colspan="2" attrs="{'invisible':[('type','!=','qualitative')]}">
-                  <separator string="Values" colspan="4"/>
-                  <field name="valid_value_ids" colspan="4"
-                         attrs="{'invisible':[('type','!=','qualitative')],'required':[('type','=','qualitative')]}"
-                         context="{'proof_id':proof_id}" nolabel="1"/>
-                </group>
-                <group col="6" colspan="3" attrs="{'invisible':[('type','=','qualitative')]}">
-                  <field name="min_value" attrs="{'required':[('type','!=','qualitative')]}"/>
-                  <field name="max_value" attrs="{'required':[('type','!=','qualitative')]}"/>
-                  <field name="uom_id" attrs="{'required':[('type','!=','qualitative')]}"/>
-                </group>
-              </page>
-              <page string="Notes">
-                <field name="notes" colspan="2" rowspan="8" nolabel="1"/>
-              </page>
-            </notebook>
-          </sheet>
+          <group col="4" colspan="2">
+            <field name="name"/>
+            <field name="company_id"/>
+            <field name="proof_id" on_change="onchange_proof_id(proof_id,context)"/>
+            <field name="method_id"/>
+            <field name="type"/>
+            <field name="sequence"/>
+          </group>
+          <notebook>
+            <page string="Values">
+              <group attrs="{'invisible':[('type','!=','qualitative')]}" colspan="1">
+                <separator string="Values"/>
+                <field name="valid_value_ids"
+                       attrs="{'invisible':[('type','!=','qualitative')],'required':[('type','=','qualitative')]}"
+                       context="{'proof_id':proof_id}" nolabel="1" colspan="1"/>
+              </group>
+              <group attrs="{'invisible':[('type','=','qualitative')]}" colspan="2">
+                <field name="min_value" attrs="{'required':[('type','!=','qualitative')]}"/>
+                <field name="max_value" attrs="{'required':[('type','!=','qualitative')]}"/>
+                <field name="uom_id" attrs="{'required':[('type','!=','qualitative')]}"/>
+              </group>
+            </page>
+            <page string="Notes">
+              <field name="notes" nolabel="1"/>
+            </page>
+          </notebook>
         </form>
       </field>
     </record>
+
     <record model="ir.ui.view" id="qc_test_template_line_tree_view">
       <field name="name">qc.test.template.line.tree</field>
       <field name="model">qc.test.template.line</field>
@@ -312,6 +322,7 @@
         </tree>
       </field>
     </record>
+
     <record model="ir.actions.act_window" id="action_qc_test_template_line">
       <field name="name">Test Template Line</field>
       <field name="res_model">qc.test.template.line</field>
@@ -326,17 +337,18 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Select Test Template" version="7.0">
-          <sheet>
-            <group colspan="6">
-              <field name="test_template_id"/>
-              <button icon="gtk-cancel" special="cancel" string="Cancel" name="action_cancel"
-                      type="object"/>
-              <button icon="gtk-ok" name="action_create_test" string="Accept" type="object"/>
-            </group>
-          </sheet>
+          <group>
+            <field name="test_template_id"/>
+          </group>
+          <footer>
+            <button icon="gtk-cancel" special="cancel" string="Cancel" name="action_cancel"
+                    type="object"/>
+            <button icon="gtk-ok" name="action_create_test" string="Accept" type="object"/>
+          </footer>
         </form>
       </field>
     </record>
+
     <record id="action_qc_test_set_template_wizard_form" model="ir.actions.act_window">
       <field name="name">qc.test.set.template.wizard</field>
       <field name="type">ir.actions.act_window</field>
@@ -352,9 +364,17 @@
       <field name="model">qc.test</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form string="Test" version="7.0">
+        <form string="QC Test" version="7.0">
+          <header>
+            <button name="confirm" states="draft" string="Confirm" icon="gtk-ok"/>
+            <button name="approve" states="waiting" string="Approve"
+                    groups="nan_quality_control.group_quality_control_supervisor" icon="gtk-ok"/>
+            <button name="cancel" states="waiting,failed,success" string="Cancel"
+                    icon="gtk-cancel"/>
+            <field name="state" widget="statusbar"/>
+          </header>
           <sheet>
-            <group colspan="4">
+            <group>
               <group>
                 <field name="name" select="1"/>
                 <field name="date"/>
@@ -362,41 +382,35 @@
                 <field name="object_id"/>
               </group>
               <group>
-                <field name="test_template_id" readonly="True" select="2"/>
-                <button string="Select template" name="%(action_qc_test_set_template_wizard_form)d"
-                        type="action" states="draft"/>
-              </group>
-              <group>
                 <field name="state" readonly="True" select="1"/>
                 <field name="success"/>
                 <field name="formula_result"/>
                 <field name="uom_id"/>
               </group>
+              <group>
+                <field name="test_template_id" readonly="True" select="2" colspan="2"/>
+                <button string="Select template" name="%(action_qc_test_set_template_wizard_form)d"
+                        type="action" states="draft"/>
+              </group>
             </group>
-            <group>
-              <button name="confirm" states="draft" string="Confirm" icon="gtk-ok"/>
-              <button name="approve" states="waiting" string="Approve"
-                      groups="nan_quality_control.group_quality_control_supervisor" icon="gtk-ok"/>
-              <button name="cancel" states="waiting,failed,success" string="Cancel"
-                      icon="gtk-cancel"/>
-            </group>
+
             <notebook>
               <page string="Values">
-                <group>
+                <group colspan="2">
                   <field name="test_line_ids" nolabel="1" colspan="4"/>
-                  <separator string="Formula" colspan="4"/>
-                  <field name="formula" colspan="4" nolabel="1"/>
+                  <separator string="Formula" colspan="2"/>
+                  <field name="formula" nolabel="1"/>
                 </group>
               </page>
               <page string="Notes">
                 <group>
                   <group>
                     <separator string="Internal Note"/>
-                    <field name="test_internal_note" nolabel="1" select="2"/>
+                    <field name="test_internal_note" nolabel="1" select="2" colspan="4"/>
                   </group>
                   <group>
                     <separator string="External Note"/>
-                    <field name="test_external_note" nolabel="1" select="2"/>
+                    <field name="test_external_note" nolabel="1" select="2" colspan="4"/>
                   </group>
                 </group>
               </page>
@@ -405,12 +419,13 @@
         </form>
       </field>
     </record>
+
     <record model="ir.ui.view" id="qc_test_tree_view">
       <field name="name">qc.test.tree</field>
       <field name="model">qc.test</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree string="Test">
+        <tree string="QC Test">
           <field name="name"/>
           <field name="test_template_id"/>
           <field name="company_id"/>
@@ -419,13 +434,14 @@
         </tree>
       </field>
     </record>
+
     <record model="ir.ui.view" id="qc_test_filter_view">
       <field name="name">qc.test.filter</field>
       <field name="model">qc.test</field>
       <field name="type">search</field>
       <field name="arch" type="xml">
         <search string="Test Filter">
-          <group col="4" colspan="2">
+          <group>
             <filter icon="terp-document-new" name="draft" string="Draft"
                     domain="[('state', '=', 'draft')]"/>
             <filter icon="terp-gtk-media-pause" name="waiting" string="Waiting"
@@ -443,13 +459,14 @@
             <field name="date"/>
           </group>
           <newline/>
-          <group expand="0" string="Group By..." colspan="4" col="8">
+          <group expand="0" string="Group By...">
             <filter string="State" icon="terp-stock_effects-object-colorize" domain="[]"
                     context="{'group_by':'state'}"/>
           </group>
         </search>
       </field>
     </record>
+
     <record model="ir.actions.act_window" id="action_qc_new_test">
       <field name="name">Test</field>
       <field name="res_model">qc.test</field>
@@ -465,42 +482,42 @@
       <field name="arch" type="xml">
         <form string="Test Line" version="7.0">
           <sheet>
-            <group>
-              <group colspan="2" attrs="{'invisible':[('proof_type','=','qualitative')]}">
+            <group col="4" colspan="2">
+              <group attrs="{'invisible':[('proof_type','=','qualitative')]}">
                 <field name="name"/>
                 <field name="company_id"/>
               </group>
-              <group colspan="2" attrs="{'invisible':[('proof_type','=','qualitative')]}">
-                <separator string="Test Result" colspan="4"/>
+              <group attrs="{'invisible':[('proof_type','=','qualitative')]}">
+                <separator string="Test Result"/>
                 <field name="actual_value_qt"/>
                 <field name="test_uom_id"/>
               </group>
-              <group colspan="2" attrs="{'invisible':[('proof_type','!=','qualitative')]}">
-                <separator string="Test Values" colspan="2"/>
+              <group attrs="{'invisible':[('proof_type','!=','qualitative')]}">
+                <separator string="Test Values"/>
                 <field name="actual_value_ql"/>
               </group>
             </group>
-            <field name="success" colspan="4"/>
+            <field name="success"/>
             <notebook>
               <page string="Check Values">
-                <group col="6" colspan="3">
+                <group>
                   <field name="proof_id"/>
                   <field name="method_id"/>
                   <field name="proof_type"/>
                 </group>
-                <group col="1" colspan="3" attrs="{'invisible':[('proof_type','!=','qualitative')]}">
+                <group attrs="{'invisible':[('proof_type','!=','qualitative')]}">
                   <separator string="Values"/>
                 </group>
                 <field name="valid_value_ids" attrs="{'invisible':[('proof_type','!=','qualitative')]}"
-                       colspan="3" nolabel="1"/>
-                <group col="6" colspan="3" attrs="{'invisible':[('proof_type','=','qualitative')]}">
+                       nolabel="1"/>
+                <group attrs="{'invisible':[('proof_type','=','qualitative')]}">
                   <field name="min_value"/>
                   <field name="max_value"/>
                   <field name="uom_id"/>
                 </group>
               </page>
-              <page string="Notes" colspan="4">
-                <field name="notes" colspan="4" rowspan="4" nolabel="0"/>
+              <page string="Notes">
+                <field name="notes" nolabel="0"/>
               </page>
             </notebook>
 
@@ -527,6 +544,7 @@
         </form>
       </field>
     </record>
+
     <record model="ir.ui.view" id="qc_test_line_tree_view">
       <field name="name">qc.test.line.tree</field>
       <field name="model">qc.test.line</field>
@@ -549,6 +567,7 @@
         </tree>
       </field>
     </record>
+
     <record model="ir.actions.act_window" id="action_qc_test_line">
       <field name="name">Test Line</field>
       <field name="res_model">qc.test.line</field>
