@@ -32,7 +32,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="action_qc_proof_method">
-      <field name="name">Methods</field>
+      <field name="name">Proof Methods</field>
       <field name="res_model">qc.proof.method</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
@@ -69,7 +69,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="action_qc_posible_value">
-      <field name="name">Posible Values</field>
+      <field name="name">Proof Posible Values</field>
       <field name="res_model">qc.posible.value</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
@@ -105,7 +105,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="action_proof_synonym">
-      <field name="name">Synonym</field>
+      <field name="name">Proof Synonym</field>
       <field name="res_model">qc.proof.synonym</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
@@ -128,9 +128,15 @@
             </group>
             <newline/>
             <group>
-              <field name="value_ids" nolabel="0" colspan="1"
-                     attrs="{'required':[('type','=','qualitative')],'readonly':[('type','!=','qualitative')] }"/>
-              <field name="synonym_ids" nolabel="0" colspan="1"/>
+              <group>
+                <separator string="Synonyms" colspan="4"/>
+                <field name="synonym_ids" nolabel="1"/>
+              </group>
+            </group>
+            <group>
+              <separator string="Values" colspan="4"/>
+              <field name="value_ids" nolabel="1"
+                     attrs="{'required':[('type','=','qualitative')],'readonly':[('type','!=','qualitative')]}"/>
             </group>
           </sheet>
         </form>
@@ -165,13 +171,11 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Test Reference Type" version="7.0">
-          <sheet>
-            <group col="4" colspan="2">
-              <field name="name"/>
-              <field name="object"/>
-              <field name="priority"/>
-            </group>
-          </sheet>
+          <group col="4" colspan="2">
+            <field name="name"/>
+            <field name="object"/>
+            <field name="priority"/>
+          </group>
         </form>
       </field>
     </record>
@@ -274,23 +278,27 @@
           <group col="4" colspan="2">
             <field name="name"/>
             <field name="company_id"/>
-            <field name="proof_id" on_change="onchange_proof_id(proof_id,context)"/>
+            <field name="proof_id"
+                   on_change="onchange_proof_id(proof_id,context)"/>
             <field name="method_id"/>
             <field name="type"/>
             <field name="sequence"/>
           </group>
           <notebook>
             <page string="Values">
-              <group attrs="{'invisible':[('type','!=','qualitative')]}" colspan="1">
-                <separator string="Values"/>
+              <group attrs="{'invisible':[('type','!=','qualitative')]}">
+                <separator string="Values" colspan="4"/>
                 <field name="valid_value_ids"
                        attrs="{'invisible':[('type','!=','qualitative')],'required':[('type','=','qualitative')]}"
                        context="{'proof_id':proof_id}" nolabel="1" colspan="1"/>
               </group>
-              <group attrs="{'invisible':[('type','=','qualitative')]}" colspan="2">
-                <field name="min_value" attrs="{'required':[('type','!=','qualitative')]}"/>
-                <field name="max_value" attrs="{'required':[('type','!=','qualitative')]}"/>
-                <field name="uom_id" attrs="{'required':[('type','!=','qualitative')]}"/>
+              <group attrs="{'invisible':[('type','=','qualitative')]}">
+                <field name="min_value"
+                       attrs="{'required':[('type','!=','qualitative')]}"/>
+                <field name="max_value"
+                       attrs="{'required':[('type','!=','qualitative')]}"/>
+                <field name="uom_id"
+                       attrs="{'required':[('type','!=','qualitative')]}"/>
               </group>
             </page>
             <page string="Notes">
@@ -341,15 +349,18 @@
             <field name="test_template_id"/>
           </group>
           <footer>
-            <button icon="gtk-cancel" special="cancel" string="Cancel" name="action_cancel"
+            <button icon="gtk-cancel" special="cancel" string="Cancel"
+                    name="action_cancel"
                     type="object"/>
-            <button icon="gtk-ok" name="action_create_test" string="Accept" type="object"/>
+            <button icon="gtk-ok" name="action_create_test" string="Accept"
+                    type="object"/>
           </footer>
         </form>
       </field>
     </record>
 
-    <record id="action_qc_test_set_template_wizard_form" model="ir.actions.act_window">
+    <record id="action_qc_test_set_template_wizard_form"
+            model="ir.actions.act_window">
       <field name="name">qc.test.set.template.wizard</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">qc.test.set.template.wizard</field>
@@ -366,12 +377,17 @@
       <field name="arch" type="xml">
         <form string="QC Test" version="7.0">
           <header>
-            <button name="confirm" states="draft" string="Confirm" icon="gtk-ok"/>
+            <button name="confirm" states="draft" string="Confirm"
+                    icon="gtk-ok"/>
             <button name="approve" states="waiting" string="Approve"
-                    groups="nan_quality_control.group_quality_control_supervisor" icon="gtk-ok"/>
-            <button name="cancel" states="waiting,failed,success" string="Cancel"
+                    groups="nan_quality_control.group_quality_control_supervisor"
+                    icon="gtk-ok"/>
+            <button name="cancel" states="waiting,failed,success"
+                    string="Cancel"
                     icon="gtk-cancel"/>
-            <field name="state" widget="statusbar"/>
+            <field name="state" widget="statusbar"
+                   statusbar_visable="draft,waiting,success,failed"
+                   statusbar_colors='{"failed":"red","waiting":"blue"}'/>
           </header>
           <sheet>
             <group>
@@ -388,8 +404,10 @@
                 <field name="uom_id"/>
               </group>
               <group>
-                <field name="test_template_id" readonly="True" select="2" colspan="2"/>
-                <button string="Select template" name="%(action_qc_test_set_template_wizard_form)d"
+                <field name="test_template_id" readonly="True" select="2"
+                       colspan="2"/>
+                <button string="Select template"
+                        name="%(action_qc_test_set_template_wizard_form)d"
                         type="action" states="draft"/>
               </group>
             </group>
@@ -406,11 +424,13 @@
                 <group>
                   <group>
                     <separator string="Internal Note"/>
-                    <field name="test_internal_note" nolabel="1" select="2" colspan="4"/>
+                    <field name="test_internal_note" nolabel="1" select="2"
+                           colspan="4"/>
                   </group>
                   <group>
                     <separator string="External Note"/>
-                    <field name="test_external_note" nolabel="1" select="2" colspan="4"/>
+                    <field name="test_external_note" nolabel="1" select="2"
+                           colspan="4"/>
                   </group>
                 </group>
               </page>
@@ -451,7 +471,8 @@
             <separator orientation="vertical"/>
             <filter icon="terp-camera_test" name="success" string="Success"
                     domain="[('success', '=', True)]"/>
-            <filter icon="terp-dialog-close" name="no-success" string="Not success"
+            <filter icon="terp-dialog-close" name="no-success"
+                    string="Not success"
                     domain="[('success', '=', False)]"/>
             <separator orientation="vertical"/>
             <field name="name"/>
@@ -460,7 +481,8 @@
           </group>
           <newline/>
           <group expand="0" string="Group By...">
-            <filter string="State" icon="terp-stock_effects-object-colorize" domain="[]"
+            <filter string="State" icon="terp-stock_effects-object-colorize"
+                    domain="[]"
                     context="{'group_by':'state'}"/>
           </group>
         </search>
@@ -505,10 +527,12 @@
                   <field name="method_id"/>
                   <field name="proof_type"/>
                 </group>
-                <group attrs="{'invisible':[('proof_type','!=','qualitative')]}">
+                <group
+                    attrs="{'invisible':[('proof_type','!=','qualitative')]}">
                   <separator string="Values"/>
                 </group>
-                <field name="valid_value_ids" attrs="{'invisible':[('proof_type','!=','qualitative')]}"
+                <field name="valid_value_ids"
+                       attrs="{'invisible':[('proof_type','!=','qualitative')]}"
                        nolabel="1"/>
                 <group attrs="{'invisible':[('proof_type','=','qualitative')]}">
                   <field name="min_value"/>
